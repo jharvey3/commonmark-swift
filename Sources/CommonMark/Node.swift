@@ -102,16 +102,16 @@ public class Node: CustomStringConvertible {
     }
     
     public var type: cmark_node_type {
-        return cmark_node_get_type(node)
+        cmark_node_get_type(node)
     }
     
     public var listType: cmark_list_type {
-        get { return cmark_node_get_list_type(node) }
+        get { cmark_node_get_list_type(node) }
         set { cmark_node_set_list_type(node, newValue) }
     }
     
     public var listStart: Int {
-        get { return Int(cmark_node_get_list_start(node)) }
+        get { Int(cmark_node_get_list_start(node)) }
         set { cmark_node_set_list_start(node, Int32(newValue)) }
     }
     
@@ -120,59 +120,43 @@ public class Node: CustomStringConvertible {
     }
     
     public var literal: String? {
-        get { return String(unsafeCString: cmark_node_get_literal(node)) }
+        get { String(unsafeCString: cmark_node_get_literal(node)) }
         set {
-          if let value = newValue {
-              cmark_node_set_literal(node, value)
-          } else {
-              cmark_node_set_literal(node, nil)
-          }
+            cmark_node_set_literal(node, newValue)
         }
     }
     
     public var start: Position {
-        return Position(line: cmark_node_get_start_line(node), column: cmark_node_get_start_column(node))
+        Position(line: cmark_node_get_start_line(node), column: cmark_node_get_start_column(node))
     }
     public var end: Position {
-        return Position(line: cmark_node_get_end_line(node), column: cmark_node_get_end_column(node))
+         Position(line: cmark_node_get_end_line(node), column: cmark_node_get_end_column(node))
     }
     
     public var headerLevel: Int {
-        get { return Int(cmark_node_get_heading_level(node)) }
+        get { Int(cmark_node_get_heading_level(node)) }
         set { cmark_node_set_heading_level(node, Int32(newValue)) }
     }
     
     public var fenceInfo: String? {
         get {
-            return String(unsafeCString: cmark_node_get_fence_info(node)) }
+            String(unsafeCString: cmark_node_get_fence_info(node)) }
         set {
-          if let value = newValue {
-              cmark_node_set_fence_info(node, value)
-          } else {
-              cmark_node_set_fence_info(node, nil)
-          }
+            cmark_node_set_fence_info(node, newValue)
         }
     }
     
     public var urlString: String? {
-        get { return String(unsafeCString: cmark_node_get_url(node)) }
+        get { String(unsafeCString: cmark_node_get_url(node)) }
         set {
-          if let value = newValue {
-              cmark_node_set_url(node, value)
-          } else {
-              cmark_node_set_url(node, nil)
-          }
+            cmark_node_set_url(node, newValue)
         }
     }
     
     public var title: String? {
-        get { return String(unsafeCString: cmark_node_get_title(node)) }
+        get { String(unsafeCString: cmark_node_get_title(node)) }
         set {
-          if let value = newValue {
-              cmark_node_set_title(node, value)
-          } else {
-              cmark_node_set_title(node, nil)
-          }
+            cmark_node_set_title(node, newValue)
         }
     }
     
